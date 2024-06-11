@@ -1,4 +1,5 @@
-from sac3 import llm_models
+# from sac3 import llm_models
+import llm_models
 
 class Evaluate:
     def __init__(self, model):
@@ -27,6 +28,8 @@ class Evaluate:
                 res = llm_models.call_guanaco_33b(prompt, max_new_tokens = 200)
             elif self.model == 'falcon-7b':
                 res = llm_models.call_falcon_7b(prompt, max_new_tokens = 200)
+            elif 'llama' in self.model:
+                res = llm_models.call_llama_2_7b(prompt, max_new_tokens = 200) 
             # other open-sourced llms 
             self_responses.append(res)
 
@@ -52,6 +55,8 @@ class Evaluate:
                 res = llm_models.call_guanaco_33b(prompt, max_new_tokens = 200)
             elif self.model == 'falcon-7b':
                 res = llm_models.call_falcon_7b(prompt, max_new_tokens = 200)
+            elif 'llama' in self.model:
+                res = llm_models.call_llama_2_7b(prompt, max_new_tokens = 200) 
             # other open-sourced llms 
             perb_responses.append(res)
   

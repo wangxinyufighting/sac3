@@ -4,15 +4,19 @@ from peft import PeftModel
 import transformers
 from transformers import AutoModelForCausalLM, AutoTokenizer
 import time
+from openai import OpenAI
 
 # Initialize OpenAI API
-openai.api_key = 'your api key' 
+# openai.api_key = 'your api key' 
+API_KEY = 'sk-4yxV5aMhnwe6R1v395B301B777A5491fA02474622fF9F079'
+client = OpenAI(api_key=API_KEY, base_url="https://www.jcapikey.com/v1")
 
 def call_openai_model(prompt, model, temperature):
     response = None
     while response is None:
         try:
-            response = openai.ChatCompletion.create(
+            # response = openai.ChatCompletion.create(
+            response = client.chat.completions.create(
                 model=model,
                 messages=[
                     {"role": "system", "content": "You are a helpful assistant."},
@@ -26,7 +30,6 @@ def call_openai_model(prompt, model, temperature):
                 raise BatchSizeException()
             print(e)
             print('Retrying...')
-            time.sleep(2)
         try:
             output = response.choices[0].message.content
         except Exception:
